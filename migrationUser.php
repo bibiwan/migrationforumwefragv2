@@ -52,7 +52,7 @@ try
 		);
 		$user_id = user_add($user_row);
 		$log = $old_userid.";".$user_id.";".$email.";".$password ;
-		$myfile = file_put_contents('logs.txt', $log.PHP_EOL , FILE_APPEND | LOCK_EX);
+		$myfile = file_put_contents('users.log', $log.PHP_EOL , FILE_APPEND | LOCK_EX);
 
 		
 	}
