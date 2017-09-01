@@ -18,6 +18,17 @@ function randomPassword() {
     return implode($pass); //turn the array into a string
 }
 
+function insert_user($user_id,$old_userid,$password) {
+	echo "plop";
+	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$reponse = $bdd->query('insert into transpo_users values(\''.$user_id.'\',\''.$old_userid.'\',\''.$password.'\')');
+	$donnees = $reponse->fetch();
+	$data = array(
+    'id'       => $donnees['id'],
+	);
+	return $data;
+}
+
 //gestionnaire de passwords
 $passwords_manager = $phpbb_container->get('passwords.manager');
 try
@@ -52,6 +63,7 @@ try
 		);
 		$user_id = user_add($user_row);
 		$log = $old_userid.";".$user_id.";".$email.";".$password ;
+		insert_user($user_id,$old_userid,$password);
 		$myfile = file_put_contents('users.log', $log.PHP_EOL , FILE_APPEND | LOCK_EX);
 
 		
