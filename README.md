@@ -1,4 +1,4 @@
-# migrationforumwefragv2
+# Migration du forum wefrag
 
 L'objectif est d'envoyer les utilisateurs et messages postés sur le forum de wefrag (https://github.com/Conardo/wefrag/) vers une solution sous phpbb.
 
