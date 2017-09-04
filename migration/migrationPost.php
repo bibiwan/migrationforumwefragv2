@@ -15,13 +15,16 @@
 * @ignore
 */
 define('IN_PHPBB', true);
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 
+/**
+permet de découper une url et obtenir un tableau des arguments.
+**/
 function my_parse_query($str) {
     if (($champs = explode('&', $str)) === false) {
         return array();
@@ -48,9 +51,16 @@ function my_parse_query($str) {
     return $resultat;
 }
 
-
+/**
+Permet d'obtenir un identifiant et mot de passe de forum à partir de l'id wefrag
+**/
 function get_user($oldid) {
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
+	
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
 	$reponse = $bdd->query('select * from transpo_users where wefrag_id=\''.$oldid.'\';');
 	$donnees = $reponse->fetch();
 	$data = array(
@@ -59,8 +69,17 @@ function get_user($oldid) {
 	);
 	return $data;
 }
+
+/**
+Permet d'obtenir un id de topic à partir de l'id  du forum et du topic sur wefrag.
+**/
 function get_topic($forum_id,$oldid) {
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
+	
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
 	$query = 'select * from transpo_topics where forum_id=\''.$forum_id.'\' and oldid=\''.$oldid.'\';';
 	$reponse = $bdd->query($query);
 	$donnees = $reponse->fetch();
@@ -68,8 +87,17 @@ function get_topic($forum_id,$oldid) {
 	return $data;
 }
 
+/**
+Permet d'insérer un topic dans la table de correspondance
+**/
 function insert_topic($forum_id,$id,$oldid) {
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
+	
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
+	echo 'insert into transpo_topics values(\''.$forum_id.'\',\''.$id.'\',\''.$oldid.'\')';
 	$reponse = $bdd->query('insert into transpo_topics values(\''.$forum_id.'\',\''.$id.'\',\''.$oldid.'\')');
 	$donnees = $reponse->fetch();
 	$data = array(
@@ -80,8 +108,12 @@ function insert_topic($forum_id,$id,$oldid) {
 
 try
 {
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
 	
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
 	$reponse = $bdd->query('select * from posts order by created_at asc');
 	//Pour chaque message de la table wefrag_posts triés par date ascendante :
 	while ($donnees = $reponse->fetch())
@@ -113,6 +145,7 @@ try
 				$poll = $uid = $bitfield = $options = ''; 
 				$data = array( 
 				'forum_id'		    => $donnees['forum_id'],
+				'topic_id'            =>0,
 				'icon_id'       	=> false,
 				'enable_bbcode'     => true,
 				'enable_smilies'    => false,
@@ -133,9 +166,10 @@ try
 
 				$url = submit_post('post', $my_subject, '', POST_NORMAL, $poll, $data);
 				$url = my_parse_query($url);
+				var_dump($url);
 				// insertion dans table de correspondance des topics wefrag avec ancien et nouvel id
-				insert_topic($url['./viewtopic.php?f'],$url['amp;t'],$oldid);
-				$log = $url['./viewtopic.php?f'].';'.$oldid.";".$oldid.";".$url['amp;t'] ;
+				insert_topic($url['../viewtopic.php?f'],$url['amp;t'],$oldid);
+				$log = $url['../viewtopic.php?f'].';'.$oldid.";".$oldid.";".$url['amp;t'] ;
 				$myfile = file_put_contents('posts.log', $log.PHP_EOL , FILE_APPEND | LOCK_EX);
 			}
 			else{
@@ -165,21 +199,21 @@ try
 				
 				$url = submit_post('reply', '', '', POST_NORMAL, $poll, $data);
 				$url = my_parse_query($url);
-				$log = $url['./viewtopic.php?f'].';'.$oldid.";".$oldid.";".$url['amp;t'] ;
+				
+				//on stocke dans un fichier l'url renvoyée par la méthode de création avec l'id de l'ancien topic pour l'utiliser sur la table de tracking de lecture (table de correspondance et fichier htaccess).
+				$log = $url['../viewtopic.php?f'].';'.$oldid.";".$oldid.";".$url['amp;t'] ;
 				$myfile = file_put_contents('posts.log', $log.PHP_EOL , FILE_APPEND | LOCK_EX);
 			}
-			
+			// déconnexion pour réinitialiser la session au prochain post.
 			$user->session_kill();
 		}
 		else
 		{
+			// probleme d'authentification
 			echo $result['error_msg'];
 		}
 		
-		/*
-		on stocke dans un fichier l'url renvoyée par la méthode de création avec l'id de l'ancien topic pour l'utiliser sur la table de tracking de lecture (table de correspondance et fichier htaccess).
-		passage au message suivant
-		*/
+		
 		}
 	}
 	catch (Exception $e)

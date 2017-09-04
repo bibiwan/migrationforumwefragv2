@@ -1,12 +1,15 @@
 <?php
 //imports des api phpbb
 define('IN_PHPBB', true);
-$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'phpbb/passwords/manager.' . $phpEx);
 
+/**
+mot de passe aléatoire
+**/
 function randomPassword() {
     $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
     $pass = array(); //remember to declare $pass as an array
@@ -18,10 +21,17 @@ function randomPassword() {
     return implode($pass); //turn the array into a string
 }
 
+/**
+Permet d'insérer un user dans la table de correspondance
+**/
 function insert_user($user_id,$old_userid,$password) {
-	echo "plop";
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
-	$reponse = $bdd->query('insert into transpo_users values(\''.$user_id.'\',\''.$old_userid.'\',\''.$password.'\')');
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
+	
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
+	$reponse = $bdd->query('insert into transpo_users values(\''.$old_userid.'\',\''.$user_id.'\',\''.$password.'\')');
 	$donnees = $reponse->fetch();
 	$data = array(
     'id'       => $donnees['id'],
@@ -33,7 +43,12 @@ function insert_user($user_id,$old_userid,$password) {
 $passwords_manager = $phpbb_container->get('passwords.manager');
 try
 {
-	$bdd = new PDO('mysql:host=localhost;dbname=wefrag;charset=utf8', 'root', '');
+	$host = "localhost";
+	$dbname = "wefrag";
+	$login_db = "root";
+	$pwd_db = "";
+	
+	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
 	$reponse = $bdd->query('select * from users');
 	while ($donnees = $reponse->fetch())
 	{
