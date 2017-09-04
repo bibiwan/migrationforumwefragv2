@@ -23,3 +23,12 @@ CREATE TABLE `transpo_users` (
 --
 ALTER TABLE `transpo_users`
   ADD PRIMARY KEY (`wefrag_id`,`id`);
+
+--
+-- Index pour la table `transpo_topics`
+--
+ ALTER TABLE `transpo_topics`
+   ADD PRIMARY KEY(
+     `forum_id`,
+     `id`,
+     `oldid`);
