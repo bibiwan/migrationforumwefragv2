@@ -131,11 +131,9 @@ try
 	$reponse = $bdd->query('select id from posts order by created_at asc');
 	//Pour chaque message de la table wefrag_posts triés par date ascendante :
 	$compteur = 0;
+	$myfile = file_put_contents('posts.log', time().PHP_EOL , FILE_APPEND | LOCK_EX);
 	while ($donnees = $reponse->fetch())
 	{	
-	if ($compteur ==500){
-		exit(0);
-	}
 		$compteur++;
 		$details = get_topic_details($donnees['id']);
 		$oldid = $details['user_id'];
@@ -186,6 +184,7 @@ try
 				'post_time'         => $datecreation->getTimestamp(),
 				'forum_name'        => '',
 				'enable_indexing'   => true,
+				'force_visibility'  => true,
 				);
 
 				$url = submit_post('post', $my_subject, '', POST_NORMAL, $poll, $data);
@@ -219,6 +218,7 @@ try
 				'post_time'         => $datecreation->getTimestamp(),
 				'forum_name'        => '',
 				'enable_indexing'   => true,
+				'force_visibility'  => true,				
 				);
 				
 				$url = submit_post('reply', '', '', POST_NORMAL, $poll, $data);
@@ -241,6 +241,8 @@ try
 		
 		}
 	echo $compteur. " posts migrés." ;	
+	$myfile = file_put_contents('posts.log',time().PHP_EOL , FILE_APPEND | LOCK_EX);
+
 	}
 	catch (Exception $e)
 	{
