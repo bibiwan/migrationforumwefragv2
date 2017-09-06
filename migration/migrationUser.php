@@ -6,7 +6,7 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'phpbb/passwords/manager.' . $phpEx);
-
+ini_set('max_execution_time', 3600);
 /**
 mot de passe aléatoire
 **/
@@ -49,10 +49,12 @@ try
 	$pwd_db = "";
 	
 	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
-	$reponse = $bdd->query('select * from users');
+	$reponse = $bdd->query('select * from users where state in(\'active\',\'disabled\')');
+	$compteur = 0;
 	while ($donnees = $reponse->fetch())
 	{
 		// traiter chaque ligne de la table wefrag_users
+		$compteur++;	
 		$old_userid = $donnees['id'];
 		$login = $donnees['login'];
 		$password = randomPassword();
@@ -83,6 +85,7 @@ try
 
 		
 	}
+	echo $compteur." utilisateurs migrés.";
 }
 catch (Exception $e)
 {
