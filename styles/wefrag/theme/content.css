@@ -11,6 +11,12 @@ ul.topiclist li {
 	list-style-type: none;
 	margin: 0;
 	padding: 5px;
+	border: solid #ddd;
+	border-width: 0 1px 1px 1px;
+}
+
+ul.topiclist li.header {
+	border-width: 0;
 }
 
 ul.topiclist dl {
@@ -75,6 +81,11 @@ ul.topiclist dfn {
 	position: absolute;
 	left: -999px;
 	width: 990px;
+}
+
+ul.topiclist.header {
+	border: 1px solid #ccc;
+	background-color: #eee;
 }
 
 .forum-image {
@@ -214,6 +225,14 @@ dd.option {
 	font-size: 1.1em;
 }
 
+/* Posts list styles
+----------------------------------------*/
+.postslist {
+	border: solid #ddd;
+	border-width: 0 0 1px 1px;
+}
+
+
 /* Post body styles
 ----------------------------------------*/
 .postbody {
@@ -256,7 +275,7 @@ dd.option {
 .postbody .content {
 	font-size: 1.3em;
 	overflow-x: auto;
-	margin: 0.3em 1em 0.5em 0.8em;
+	margin: 1em 1em 0.5em 0.8em;
 }
 
 .postbody img.postimage {

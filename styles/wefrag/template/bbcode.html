@@ -37,9 +37,6 @@
 					<xsl:text> </xsl:text>
 					<a href="{@post_url}" data-post-id="{@post_id}" onclick="if(document.getElementById(hash.substr(1)))href=hash">&#8593;</a>
 				</xsl:if>
-				<xsl:if test="@date">
-					<div class="responsive-hide"><xsl:value-of select="@date"/></div>
-				</xsl:if>
 			</cite>
 		</xsl:if>
 		<xsl:apply-templates/>

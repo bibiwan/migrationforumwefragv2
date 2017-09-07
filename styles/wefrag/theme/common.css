@@ -145,12 +145,6 @@ a:hover	{ text-decoration: underline; }
 	padding: 15px;
 }
 
-@media only screen and (max-width: 1220px), only screen and (max-device-width: 1220px) {
-	.wrap {
-		margin: 0 12px;
-	}
-}
-
 .page-body {
 	margin: 4px 0;
 	clear: both;
@@ -218,10 +212,11 @@ a:hover	{ text-decoration: underline; }
 
 .post {
 	padding: 5px 10px;
-	margin-bottom: 4px;
 	background-repeat: no-repeat;
 	background-position: 100% 0;
 	position: relative;
+	border: solid #ddd;
+	border-width: 1px 1px 0 0;
 }
 
 .rowbg {
@@ -830,7 +825,7 @@ fieldset.fields1 dl.pmlist dd.recipients {
 
 .pagination > ul > li {
 	display: inline-block !important;
-	padding: 0;
+	padding: 0 !important;
 	font-size: 100%;
 	line-height: normal;
 	vertical-align: middle;
@@ -839,9 +834,6 @@ fieldset.fields1 dl.pmlist dd.recipients {
 .pagination li a, .pagination li span {
 	border-radius: 2px;
 	padding: 2px 5px;
-}
-
-.pagination li.active span {
 	display: inline-block;
 	font-size: 13px;
 	font-weight: normal;

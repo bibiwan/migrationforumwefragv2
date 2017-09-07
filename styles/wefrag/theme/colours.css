@@ -80,16 +80,12 @@ a:hover {
 
 .headerbar {
 	color: #FFFFFF;
-}
-
-.headerbar, .forumbg {
 	background-color: #eee;
 	border: 1px solid #ccc;
 }
 
 .forabg {
 	background-color: #eee;
-	border: 1px solid #ccc;
 }
 
 .navbar {
@@ -372,8 +368,7 @@ dl.faq dt {
 ----------------------------------------*/
 /* Quote block */
 blockquote {
-	background-color: #EBEADD;
-	border-color:#DBDBCE;
+	font-style: italic;
 }
 
 blockquote blockquote {
@@ -548,7 +543,7 @@ dd.profile-warnings {
 Colours and backgrounds for buttons.css
 -------------------------------------------------------------- */
 .button {
-	background-color: #ddd;
+	background-color: #eee;
 	border: 0;
 	color: #c30;
 	cursor: pointer;
@@ -573,12 +568,9 @@ Colours and backgrounds for buttons.css
 ---------------------------------------- */
 
 .pagination li a {
-	background: #ECEDEE;
-	filter: none;
-	border-color: #B4BAC0;
-	box-shadow: none;
-	-webkit-box-shadow: none;
-	color: #5C758C;
+	height: initial;
+	color: #999;
+	border: 1px solid #ddd;
 }
 
 .pagination li.ellipsis span {
@@ -587,14 +579,14 @@ Colours and backgrounds for buttons.css
 }
 
 .pagination li.active span {
-	background: #4692BF;
-	border-color: #4692BF;
-	color: #FFFFFF;
+	color: #fff;
+	background-color: #bbb;
+	border-color: #bbb;
 }
 
 .pagination li a:hover, .pagination li a:hover .icon, .pagination .dropdown-visible a.dropdown-trigger, .nojs .pagination .dropdown-container:hover a.dropdown-trigger {
-	background: #368AD2;
-	border-color: #368AD2;
+	background: #c30;
+	border-color: #c30;
 	filter: none;
 	color: #FFFFFF;
 	text-shadow: none;
