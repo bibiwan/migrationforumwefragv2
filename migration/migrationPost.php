@@ -128,7 +128,7 @@ try
 	$pwd_db = "";
 	
 	$bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8', $login_db , $pwd_db);
-	$reponse = $bdd->query('select id from posts order by created_at asc');
+	$reponse = $bdd->query('select id from posts order by id asc');
 	//Pour chaque message de la table wefrag_posts triés par date ascendante :
 	$compteur = 0;
 	$myfile = file_put_contents('posts.log', time().PHP_EOL , FILE_APPEND | LOCK_EX);
@@ -150,6 +150,7 @@ try
 		// si connexion ok
 		if ($result['status'] == LOGIN_SUCCESS)
 		{
+			//var_dump($details);
 			$url = "";
 			$my_text = $details['body']	;
 			$my_text = utf8_normalize_nfc($my_text);
@@ -246,6 +247,7 @@ try
 	}
 	catch (Exception $e)
 	{
+		
 		die('Erreur : ' . $e->getMessage());
 	}
 
