@@ -25,10 +25,11 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 try
 {
 	$loginNofrag = "nofrag";
-	$pwdNofrag = "HRJqIKwu"; // test : "HRJqIKwu" prod : ""
+	$pwdNofrag = "HRJqIKwu"; // test : "HRJqIKwu" prod : "S7yFKDIO"
+	$keynofrag = "usagee5BahNgah1u";
 	$forum_id = 16 ; // 16 pour test, 11 pour prod
 	/*
-	test fait avec : http://nomdedomaine/insert-news-topic.php?content=Un+certain+Zeng+Xiancheng+pr%C3%A9sentait+en+juin+dernier+Bright+Memory%2C+un+projet+de+FPS+sous+l%27Unreal+Engine+4+qu%27il+d%C3%A9veloppe+en+solitaire.+La+premi%C3%A8re+bande-annonce+montrait+un+gameplay+m%C3%AAlant+armes+%C3%A0+feu+et+combat+au+corps+%C3%A0+corps%2C+un+peu+semblable+%C3%A0+Shadow+Warrior+dans+un+style+plus+bord%C3%A9lique.+La+vid%C3%A9o+avait+alors+%C3%A9t%C3%A9+mise+en+avant+par+Epic+Games.+Deux+mois+plus+tard%2C+un+nouvel+extrait+de+cinq+minutes+de+gameplay+est+sorti+%3A%0D%0A%0D%0ARegarder+la+vid%C3%A9o+sur+Youtube%0D%0AQuand+on+consid%C3%A8re+que+c%27est+un+seul+homme+qui+a+r%C3%A9alis%C3%A9+tout+%C3%A7a%2C+oui+c%27est+impressionnant.+Mais+une+fois+pass%C3%A9+le+stade+de+l%27admiration%2C+Bright+Memory+ressemble+surtout+%C3%A0+un+FPS+sans+grande+inspiration+ni+coh%C3%A9rence%2C+bricol%C3%A9+avec+des+assets+g%C3%A9n%C3%A9riques+et+une+IA+%C3%A0+la+ramasse.+Le+HUD+et+le+syst%C3%A8me+de+combo+peuvent+malgr%C3%A9+tout+s%27av%C3%A9rer+int%C3%A9ressants%2C+%C3%A0+condition+que+Zeng+trouve+une+m%C3%A9canique+plus+originale+que+celle+de+martyriser+son+clic+gauche+comme+un+demeur%C3%A9+en+attendant+le+prochain+%C3%A9v%C3%A9nement+script%C3%A9.+L%C3%A0%2C+on+a+surtout+l%27impressio+%0D%0A%0D%0A%5Burl%3Dhttp%3A%2F%2Fwww.nofrag.com%2F2017%2Fsep%2F12%2F51031%2F%5DLire+toute+la+news+sur+Nofrag.com...%5B%2Furl%5D&title=Bright+Memory%2C+un+FPS+d%C3%A9velopp%C3%A9+par+une+seule+personne
+	test fait avec : http://nomdedomaine/insert-news-topic.php?content=Un+certain+Zeng+Xiancheng+pr%C3%A9sentait+en+juin+dernier+Bright+Memory%2C+un+projet+de+FPS+sous+l%27Unreal+Engine+4+qu%27il+d%C3%A9veloppe+en+solitaire.+La+premi%C3%A8re+bande-annonce+montrait+un+gameplay+m%C3%AAlant+armes+%C3%A0+feu+et+combat+au+corps+%C3%A0+corps%2C+un+peu+semblable+%C3%A0+Shadow+Warrior+dans+un+style+plus+bord%C3%A9lique.+La+vid%C3%A9o+avait+alors+%C3%A9t%C3%A9+mise+en+avant+par+Epic+Games.+Deux+mois+plus+tard%2C+un+nouvel+extrait+de+cinq+minutes+de+gameplay+est+sorti+%3A%0D%0A%0D%0ARegarder+la+vid%C3%A9o+sur+Youtube%0D%0AQuand+on+consid%C3%A8re+que+c%27est+un+seul+homme+qui+a+r%C3%A9alis%C3%A9+tout+%C3%A7a%2C+oui+c%27est+impressionnant.+Mais+une+fois+pass%C3%A9+le+stade+de+l%27admiration%2C+Bright+Memory+ressemble+surtout+%C3%A0+un+FPS+sans+grande+inspiration+ni+coh%C3%A9rence%2C+bricol%C3%A9+avec+des+assets+g%C3%A9n%C3%A9riques+et+une+IA+%C3%A0+la+ramasse.+Le+HUD+et+le+syst%C3%A8me+de+combo+peuvent+malgr%C3%A9+tout+s%27av%C3%A9rer+int%C3%A9ressants%2C+%C3%A0+condition+que+Zeng+trouve+une+m%C3%A9canique+plus+originale+que+celle+de+martyriser+son+clic+gauche+comme+un+demeur%C3%A9+en+attendant+le+prochain+%C3%A9v%C3%A9nement+script%C3%A9.+L%C3%A0%2C+on+a+surtout+l%27impressio&title=Bright+Memory%2C+un+FPS+d%C3%A9velopp%C3%A9+par+une+seule+personne
 	*/
 		//Login sur phpbb via l'api avec ces identifiants
 		$user->session_begin();
@@ -39,9 +40,13 @@ try
 		// si connexion ok
 		if ($result['status'] == LOGIN_SUCCESS)
 		{
+			$key =  urldecode($request->variable('key', "",true));
+			$url =  urldecode($request->variable('url', "",true));
 			$my_text = urldecode($request->variable('content', "",true));
 			$my_subject = urldecode($request->variable('title', '',true));
-			if (strlen($my_text) > 0 && strlen($my_subject)>0){
+			
+			if (strlen($my_text) > 0 && strlen($my_subject)>0 && $key==$keynofrag){
+				$my_text =$my_text."\n\n\n[url=".$url."]Lire toute la news sur Nofrag.com...[/url]";
 				$my_text = utf8_normalize_nfc($my_text);
 				$uid = $bitfield = $options = ''; // will be modified by generate_text_for_storage
 				$allow_bbcode = $allow_urls = $allow_smilies = true;
