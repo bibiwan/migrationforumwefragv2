@@ -84,8 +84,16 @@ a:hover {
 	border: 1px solid #ccc;
 }
 
+
 .forabg {
 	background-color: #eee;
+	display: inline-block;
+}
+
+@media (max-width: 1200px) {
+	.forabg {
+		width: 100%;
+	}
 }
 
 .navbar {
@@ -131,10 +139,6 @@ table.zebra-list tr:nth-child(even) td, ul.zebra-list li:nth-child(even) {
 
 .fieldsbg {
 	background-color: #E7E8EA;
-}
-
-.site_logo {
-	background-image: url("./images/site_logo.png");
 }
 
 /* Horizontal lists
@@ -286,11 +290,6 @@ li.reported:hover {
 }
 .sticky, .announce {
 	/* you can add a background for stickies and announcements*/
-}
-
-div.rules {
-	background-color: #ECD5D8;
-	color: #BC2A4D;
 }
 
 p.post-notice {
@@ -947,7 +946,7 @@ input.disabled {
 
 .loading_indicator {
 	background-color: #000000;
-	background-image: url("./images/loading.png");
+	background-image: url("./images/loading.gif");
 }
 
 .dropdown-extended ul li {

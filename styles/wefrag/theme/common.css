@@ -146,7 +146,7 @@ a:hover	{ text-decoration: underline; }
 }
 
 .page-body {
-	margin: 4px 0;
+	margin: 10px 0;
 	clear: both;
 }
 
@@ -195,10 +195,35 @@ a:hover	{ text-decoration: underline; }
 	padding: 3px 10px;
 }
 
+.forumsblock {
+	width: 100%;
+	display: inline-block;
+}
+
+.forumslist {
+	float: left;
+	width: 640px;
+	margin-right: 10px;
+}
+
+@media (max-width: 1200px) {
+	.forumslist {
+		float: none;
+		width: 100%;
+		margin: 0;
+	}
+}
+
 .forabg {
 	margin-bottom: 4px;
-	clear: both;
+	float: left;
+	width: 100%;
 }
+
+.forabg.last {
+	margin-right: 0;
+}
+
 
 .forumbg {
 	margin-bottom: 4px;
@@ -870,6 +895,7 @@ fieldset.fields1 dl.pmlist dd.recipients {
 .row .pagination {
 	display: block;
 	margin-top: -12px;
+	padding-right: 225px;
 }
 
 .row .pagination > ul {
@@ -988,7 +1014,6 @@ div.rules {
 	margin: 10px 0;
 	font-size: 1.1em;
 	padding: 5px 10px;
-	border-radius: 7px;
 }
 
 div.rules ul, div.rules ol {
@@ -1255,4 +1280,8 @@ ul.linklist:after,
 
 .dropdown .clone.hidden + li {
 	border-top: none;
+}
+
+.no-margin {
+	margin: 0 !important;
 }

@@ -1,4 +1,5 @@
-
+<div class="forumsblock">
+<div class="forumslist">
 <!-- BEGIN forumrow -->
 	<!-- IF (forumrow.S_IS_CAT and not forumrow.S_FIRST_ROW) or forumrow.S_NO_CAT  -->
 			</ul>
@@ -54,16 +55,6 @@
 									<i class="icon <!-- IF forumrow.subforum.IS_LINK -->fa-external-link<!-- ELSE -->fa-file-o<!-- ENDIF --> fa-fw <!-- IF forumrow.subforum.S_UNREAD --> icon-red<!-- ELSE --> icon-blue<!-- ENDIF --> icon-md" aria-hidden="true"></i>{forumrow.subforum.SUBFORUM_NAME}</a><!-- IF not forumrow.subforum.S_LAST_ROW -->{L_COMMA_SEPARATOR}<!-- ENDIF --><!-- EVENT forumlist_body_subforum_link_append -->
 							<!-- END subforum -->
 							<!-- EVENT forumlist_body_subforums_after -->
-						<!-- ENDIF -->
-
-						<!-- IF not S_IS_BOT -->
-						<div class="responsive-show" style="display: none;">
-							<!-- IF forumrow.CLICKS -->
-								{L_REDIRECTS}{L_COLON} <strong>{forumrow.CLICKS}</strong>
-							<!-- ELSEIF not forumrow.S_IS_LINK and forumrow.TOPICS -->
-								{L_TOPICS}{L_COLON} <strong>{forumrow.TOPICS}</strong>
-							<!-- ENDIF -->
-						</div>
 						<!-- ENDIF -->
 					</div>
 				</dt>
@@ -123,3 +114,11 @@
 		</div>
 	</div>
 <!-- END forumrow -->
+
+</div>
+
+<!-- EVENT index_body_markforums_after -->
+
+<!-- EVENT index_body_markforums_before -->
+
+</div>
