@@ -58,7 +58,6 @@ a {
 
 /* Links for forum/topic lists */
 a.forumtitle {
-	font-family: "Trebuchet MS", Helvetica, Arial, Sans-serif;
 	font-size: 1.2em;
 	font-weight: bold;
 	text-decoration: none;
@@ -69,8 +68,6 @@ a.forumtitle:hover {
 }
 
 a.topictitle {
-	font-family: "Trebuchet MS", Helvetica, Arial, Sans-serif;
-	font-size: 1.2em;
 	font-weight: bold;
 	text-decoration: none;
 	display: inline;

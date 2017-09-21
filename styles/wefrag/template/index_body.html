@@ -1,14 +1,21 @@
 <!-- INCLUDE overall_header.html -->
 
-<!-- EVENT index_body_markforums_before -->
-<!-- IF U_MARK_FORUMS -->
-	<div class="action-bar compact">
-		<a href="{U_MARK_FORUMS}" class="mark-read rightside" accesskey="m" data-ajax="mark_forums_read">{L_MARK_FORUMS_READ}</a>
-	</div>
-<!-- ENDIF -->
-<!-- EVENT index_body_markforums_after -->
-
 <!-- INCLUDE forumlist_body.html -->
+
+<!-- IF U_MARK_FORUMS -->
+<div class="action-bar compact">
+	<a href="{U_MARK_FORUMS}" class="mark-read rightside" accesskey="m" data-ajax="mark_forums_read">{L_MARK_FORUMS_READ}</a>
+</div>
+<!-- ENDIF -->
+
+<div class="navbar rules">
+	<ul>
+		<li>Aucune insulte ne sera tolérée.</li>
+		<li>Le warez, les incitations au piratage, la pornographie et le racisme sont interdits.</li>
+		<li>Respectez les goûts et les opinions des autres, en particulier sur le forum Partage où la polémique n’est pas la bienvenue.</li>
+		<li>Vous êtes fortement encouragé à modérer les threads dont vous êtes le modérateur.</li>
+	</ul>
+</div>
 
 <!-- EVENT index_body_forumlist_body_after -->
 
