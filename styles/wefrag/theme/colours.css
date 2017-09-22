@@ -306,10 +306,6 @@ ul.forums {
 	background-color: #ffffff;
 }
 
-ul.topiclist dd {
-	border-left-color: #FFFFFF;
-}
-
 .rtl ul.topiclist dd {
 	border-right-color: #FFFFFF;
 	border-left-color: transparent;
