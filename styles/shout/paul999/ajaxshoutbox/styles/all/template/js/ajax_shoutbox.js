@@ -4,6 +4,7 @@
     var firstId = -1;
     var waitingEarlier;
 
+	
     /**
      * Add a resultset of posts in front of current posts.
      *
@@ -200,3 +201,10 @@
     });
 
 })(jQuery);
+/**
+* ajout horodatage à la shootbox
+*
+**/
+function addForumNofragTribuneTime(heure) {
+	 $("#text_shoutbox").val(heure);
+}
